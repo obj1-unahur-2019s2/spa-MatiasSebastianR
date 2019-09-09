@@ -1,5 +1,15 @@
 
 object olivia {
+	var concentracion = 6
+	
+	method recibirMasajes() { concentracion += 3}
+	method discutir() { 
+		   if ( concentracion >= 1) { concentracion -= 1}
+		   		}
+	method gradoDeConcentracion() { return concentracion }
+	method darseUnBanioDeVapor() {}
+	
+	//agrego el metodo de darse un baño de vapor para mantener el polimorfismo en el spa
 }
 
 
@@ -20,22 +30,33 @@ object bruno {
 	method verElNoticiero() { esFeliz = false }
 	
 	method estaPerfecto() { return self.esFeliz() and not self.tieneSed() and self.peso().between(50000, 70000) }
-	method mediodiaEnCasa() { 
-		self.comerFideos()
-		// y que mas?
-	}
+	method mediodiaEnCasa() { self.comerFideos() ; self.tomarAgua() ; self.verElNoticiero()	}
+
 }
 
 object ramiro {
-	method recibirMasajes() { /*... completar ...*/ }
-	method darseUnBanioDeVapor() { /*... completar ...*/ }
-	method comerseUnBigMac() { /*... completar ...*/ }
-	method bajarALaFosa() { /*... completar ...*/ }
-	method jugarAlPaddle() { /*... completar ...*/ }
+	var contractura = 0
+	var pielGrasosa = false
 	
-	method diaDeTrabajo() { 
-		/*... completar ...*/
+	method nivelDeContractura() {
+		if (contractura == 0) { return "nada de contractura" } 	
+		if (contractura.between(1,10)) { return "un poco de contractura"}
+		if (contractura > 10) { return "bastante contractura"}
+		return contractura	
 	}
+	
+	method recibirMasajes() { 
+		if (contractura >= 2) { contractura -= 2 }
+		if (contractura == 1) { contractura = 0 }
+	}
+	
+	method darseUnBanioDeVapor() { pielGrasosa = false }
+	method comerseUnBigMac() { pielGrasosa = true }
+	method bajarALaFosa() { pielGrasosa = true ; contractura += 1 }
+	method jugarAlPaddle() { contractura += 3 }
+	method diaDeTrabajo() { self.bajarALaFosa() ; self.comerseUnBigMac() ; self.comerseUnBigMac() }
+	
+	
 }
 
 
